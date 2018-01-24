@@ -51,20 +51,21 @@ class MainActivity : AppCompatActivity() {
             mILoopPayService = ILoopPayService.Stub.asInterface(service)
             if(null ==  mILoopPayService ) {
                 Log.e(TAG, "mILoopPayService is null,Service is cann't bind")
-                Log.e(TAG, "")
-                return
-            }
-            Log.i(TAG, "mILoopPayService is not null")
-            mILoopPayService!!.bindDevice("afdsafsafsadfsadf",null,object: IBindDeviceCallback.Stub() {
-                override fun onSuccess(result: DeviceResult?) {
-                    if(null != result)
-                        Log.i(TAG,"IBindDeviceCallback: "+"deviceName: "+result.name+"  deviceBrand: "+result.brand)
-                }
-                override fun onFail(errorCode: Int, result: DeviceResult?) {
-                    Log.i(TAG,"IBindDeviceCallback call back failed")
 
-                }
-            } )
+            }else {
+                Log.i(TAG, "mILoopPayService is not null")
+                mILoopPayService!!.bindDevice("afdsafsafsadfsadf", null, object : IBindDeviceCallback.Stub() {
+                    override fun onSuccess(result: DeviceResult?) {
+                        if (null != result)
+                            Log.i(TAG, "IBindDeviceCallback: " + "deviceName: " + result.name + "  deviceBrand: " + result.brand)
+                    }
+
+                    override fun onFail(errorCode: Int, result: DeviceResult?) {
+                        Log.i(TAG, "IBindDeviceCallback call back failed")
+
+                    }
+                })
+            }
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
