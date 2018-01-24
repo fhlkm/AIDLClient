@@ -33,9 +33,7 @@ class MainActivity : AppCompatActivity() {
             attemptToBindService()
         }
 
-        ask_permission.setOnClickListener {
-            askTakePciturePermission()
-        }
+
     }
 
     private fun attemptToBindService() {
@@ -50,8 +48,9 @@ class MainActivity : AppCompatActivity() {
 
     var mServiceConnection: ServiceConnection = object: ServiceConnection{
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+            mILoopPayService = ILoopPayService.Stub.asInterface(service)
             if(null ==  mILoopPayService ) {
-                mILoopPayService = ILoopPayService.Stub.asInterface(service)
+
             }else{
                 Log.i(TAG, "mILoopPayService is null")
             }
@@ -77,24 +76,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun askTakePciturePermission(){
-        val permissionCheck = ContextCompat.checkSelfPermission(this@MainActivity,
-                Manifest.permission.CAMERA);
-        if(permissionCheck == PackageManager.PERMISSION_GRANTED){
-            Log.i(TAG,"Take picture right is granted")
-        }else{
-            ActivityCompat.requestPermissions(this,  arrayOf( Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE ), 0)
-        }
-    }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        if (requestCode == 0) {
-            if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                Log.i(TAG,"Take picture right is granted")
-            }
-        }
-    }
 
 
 
