@@ -50,9 +50,9 @@ class MainActivity : AppCompatActivity() {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             mILoopPayService = ILoopPayService.Stub.asInterface(service)
             if(null ==  mILoopPayService ) {
-
-            }else{
-                Log.i(TAG, "mILoopPayService is null")
+                Log.e(TAG, "mILoopPayService is null,Service is cann't bind")
+                Log.e(TAG, "")
+                return
             }
             Log.i(TAG, "mILoopPayService is not null")
             mILoopPayService!!.bindDevice("afdsafsafsadfsadf",null,object: IBindDeviceCallback.Stub() {
@@ -65,9 +65,6 @@ class MainActivity : AppCompatActivity() {
 
                 }
             } )
-            if(mILoopPayService == null){
-                Log.e(TAG, "Service is cann't bind")
-            }
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
