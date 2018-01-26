@@ -16,7 +16,7 @@
  * to change without notice.
  */
 
-package com.looppay.data;
+package com.loop.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;

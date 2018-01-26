@@ -1,0 +1,1 @@
+package com.loop.data;import com.loop.data.DeviceResult;interface IBindDeviceCallback {    void onSuccess(in DeviceResult result);    void onFail(int errorCode,in DeviceResult result);}

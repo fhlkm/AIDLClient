@@ -1,5 +1,5 @@
 // DeviceResult.aidl
-package com.looppay.data;
+package com.loop.data;
 
 // Declare any non-default types here with import statements
 
